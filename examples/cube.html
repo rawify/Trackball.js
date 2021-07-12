@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>Trackball.js Demo</title>
+
+  <style>
+    .scene {
+      width: 400px;
+      touch-action: none;
+      height: 400px;
+      border: 1px solid #999;
+      perspective: 500px;
+      position: relative;
+    }
+
+    .cube {
+      width: 200px;
+      height: 200px;
+      margin: 100px;
+      transform-style: preserve-3d;
+      box-sizing: border-box;
+    }
+
+    .face {
+      position: absolute;
+      pointer-events: none;
+      width: 200px;
+      height: 200px;
+      border: 2px solid black;
+      line-height: 200px;
+      font-size: 150px;
+      color: white;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .face-front {
+      background: hsla(0, 90%, 50%, 0.8);
+    }
+
+    .face-right {
+      background: hsla(60, 90%, 50%, 0.8);
+    }
+
+    .face-back {
+      background: hsla(120, 90%, 50%, 0.8);
+    }
+
+    .face-left {
+      background: hsla(180, 90%, 50%, 0.8);
+    }
+
+    .face-top {
+      background: hsla(240, 90%, 50%, 0.9);
+    }
+
+    .face-bottom {
+      background: hsla(300, 90%, 50%, 0.8);
+    }
+
+    .face-front {
+      transform: rotateY(0deg) translateZ(100px);
+    }
+
+    .face-right {
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .face-back {
+      transform: rotateY(180deg) translateZ(100px);
+    }
+
+    .face-left {
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+
+    .face-top {
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .face-bottom {
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="scene">
+    <div class="cube">
+      <div class="face face-front">
+        <svg width="200" height="200">
+          <circle cx="100" cy="100" r="20" fill="white"></circle>
+        </svg>
+      </div>
+      <div class="face face-back">
+        <svg width="200" height="200">
+
+          <circle cx="40" cy="40" r="20" fill="white"></circle>
+          <circle cx="160" cy="160" r="20" fill="white"></circle>
+
+          <circle cx="160" cy="40" r="20" fill="white"></circle>
+          <circle cx="40" cy="160" r="20" fill="white"></circle>
+
+          <circle cx="40" cy="100" r="20" fill="white"></circle>
+          <circle cx="160" cy="100" r="20" fill="white"></circle>
+        </svg>
+      </div>
+      <div class="face face-right">
+        <svg width="200" height="200">
+          <circle cx="100" cy="100" r="20" fill="white"></circle>
+          <circle cx="40" cy="40" r="20" fill="white"></circle>
+          <circle cx="160" cy="160" r="20" fill="white"></circle>
+
+          <circle cx="160" cy="40" r="20" fill="white"></circle>
+          <circle cx="40" cy="160" r="20" fill="white"></circle>
+        </svg>
+      </div>
+      <div class="face face-left">
+        <svg width="200" height="200">
+          <circle cx="40" cy="40" r="20" fill="white"></circle>
+          <circle cx="160" cy="160" r="20" fill="white"></circle>
+        </svg>
+      </div>
+      <div class="face face-top">
+        <svg width="200" height="200">
+          <circle cx="40" cy="40" r="20" fill="white"></circle>
+          <circle cx="160" cy="160" r="20" fill="white"></circle>
+
+          <circle cx="160" cy="40" r="20" fill="white"></circle>
+          <circle cx="40" cy="160" r="20" fill="white"></circle>
+        </svg>
+      </div>
+      <div class="face face-bottom">
+        <svg width="200" height="200">
+          <circle cx="100" cy="100" r="20" fill="white"></circle>
+          <circle cx="40" cy="40" r="20" fill="white"></circle>
+          <circle cx="160" cy="160" r="20" fill="white"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <script src="../node_modules/quaternion/quaternion.min.js"></script>
+  <script src="../trackball.min.js"></script>
+  <script>
+
+    var cube = document.getElementsByClassName("cube")[0];
+
+    var tr = new Trackball({
+      scene: ".scene", // Selector to apply trackball on
+      q: new Quaternion(Math.random(), Math.random(), Math.random(), Math.random()).normalize(), // Initial rotation
+      smooth: false, // Smoothly roll out after a drag impulse was applied
+      limitAxis: null, // Pass "x" or "y" if rotation should be limited to a certain axis
+    });
+
+    tr.on("draw", function (q) {
+      cube.style.transform = "matrix3d(" + q.toMatrix4() + ")";
+    });
+
+    var inc = Quaternion.fromAxisAngle([Math.random(), Math.random(), Math.random()], 1 / 100);
+
+    requestAnimationFrame(loop = function () {
+      tr.rotate(inc);
+      requestAnimationFrame(loop);
+    });
+
+  </script>
+</body>
+
+</html>
