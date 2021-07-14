@@ -16,7 +16,7 @@ If you are interested in the math behind this library or want to see a demo, tak
 The usage is pretty straightforward. Create a scene that should handle the input and put a object with 3D transforms in it:
 
 
-```
+```html
 <div id="scene">
   <div id="object">
   	<div class="side"></div>
@@ -27,7 +27,7 @@ The usage is pretty straightforward. Create a scene that should handle the input
 
 The scene and the object get styling to prepare it for 3D rotation:
 
-```
+```html
 <style type="text/css">
 #scene {
   width: 400px;
@@ -57,7 +57,7 @@ The scene and the object get styling to prepare it for 3D rotation:
 
 And for each side translate it in 3D to form the object you want using CSS3 transforms, like for example:
 
-```
+```css
 transform: rotateY(90deg) translateZ(100px);
 ```
 
