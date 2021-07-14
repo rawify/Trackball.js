@@ -8,7 +8,7 @@ Trackball.js is a small JavaScript library on top of [Quaternion.js](https://git
 
 The library does no styling or anything to the DOM, it handles the user action and calculates the transformation you should apply. But this way you have much more freedom on perspective, what elements should rotate and what additional transforms should be applied to the element.
 
-If you are interested in the math behind this library or want to see a demo, take a look at the [derivation of the trackball](https://www.xarg.org/2021/07/arcball-rotation-using-quaternions/).
+If you are interested in the math behind this library or want to see a demo, take a look at the [derivation of the trackball](https://www.xarg.org/2021/07/trackball-rotation-using-quaternions/).
 
 
 ## Usage
