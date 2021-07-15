@@ -74,7 +74,7 @@ let tr = new Trackball({
    scene: "#scene", // Selector to apply trackball on
    q: new Quaternion, // Initial rotation
    impulse: true, // Smoothly roll out after a drag impulse was applied
-   limitAxis: null, // Pass "x" or "y" if rotation should limited to one axis
+   limitAxis: null, // Pass "x" or "y" if rotation should be limited to one axis
 });
 
 tr.on("draw", function(q) {
