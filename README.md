@@ -1,5 +1,9 @@
 # Trackball.js - 3D Trackballs for your Website
 
+[![NPM Package](https://nodei.co/npm-dl/fraction.js.png?months=6&height=1)](https://npmjs.org/package/Trackball)
+
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 Trackball.js is a small JavaScript library on top of [Quaternion.js](https://github.com/infusion/Quaternion.js) to enable free 3D rotation of elements using CSS3 transforms that feels naturally by using the mouse or touch.
 
 <p align="center">
