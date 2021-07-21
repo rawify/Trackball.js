@@ -1,6 +1,6 @@
 # Trackball.js - 3D Trackballs for your Website
 
-[![NPM Package](https://nodei.co/npm-dl/Trackball.png?months=6&height=1)](https://npmjs.org/package/Trackball)
+[![NPM Package](https://nodei.co/npm-dl/trackball.png?months=6&height=1)](https://npmjs.org/package/trackball)
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
@@ -90,6 +90,13 @@ tr.on("draw", function(q) {
 
 The good thing about the callback approach is, that you have full control over the styling. You can use the passed quaternion and transform it further or even use it in another way than CSS transforms.
 
+Installation
+===
+Installing Trackball.js is as easy as cloning this repo or use one of the following commands:
+
+```
+npm i trackball
+```
 
 Coding Style
 ===
