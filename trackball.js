@@ -1,5 +1,5 @@
 /**
- * @license Trackball.js v1.1.0 10/08/2023
+ * @license Trackball.js v1.1.1 10/08/2023
  *
  * Copyright (c) 2023, Robert Eisele (robert@raw.org)
  * Licensed under the MIT license.

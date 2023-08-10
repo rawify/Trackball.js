@@ -1,9 +1,9 @@
 {
     "name": "trackball",
     "title": "Trackball.js",
-    "version": "1.1.0",
-    "homepage": "https://www.xarg.org/2021/07/trackball-rotation-using-quaternions/",
-    "bugs": "https://github.com/infusion/Trackingball.js/issues",
+    "version": "1.1.1",
+    "homepage": "https://raw.org/article/trackball-rotation-using-quaternions/",
+    "bugs": "https://github.com/rawify/Trackball.js/issues",
     "description": "A library to add a virtual Trackball to your DOM",
     "keywords": [
         "arcball",
@@ -16,7 +16,7 @@
         "3d",
         "quaternion"
     ],
-    "author": "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)",
+    "author": "Robert Eisele <robert@raw.org> (https://raw.org/)",
     "main": "trackball.js",
     "types": "trackball.d.ts",
     "private": false,
@@ -27,7 +27,7 @@
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git://github.com/infusion/Trackball.js.git"
+        "url": "git@github.com:rawify/Trackball.js.git"
     },
     "funding": {
         "type": "patreon",
