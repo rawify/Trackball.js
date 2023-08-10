@@ -146,7 +146,7 @@
   </div>
 
   <script src="../node_modules/quaternion/quaternion.min.js"></script>
-  <script src="../trackball.min.js"></script>
+  <script src="../trackball.js"></script>
   <script>
 
     var cube = document.getElementsByClassName("cube")[0];
@@ -156,18 +156,17 @@
       q: new Quaternion(Math.random(), Math.random(), Math.random(), Math.random()).normalize(), // Initial rotation
       smooth: false, // Smoothly roll out after a drag impulse was applied
       limitAxis: null, // Pass "x" or "y" if rotation should be limited to a certain axis
-    });
-
-    tr.on("draw", function (q) {
-      cube.style.transform = "matrix3d(" + q.toMatrix4() + ")";
+      onDraw: function (q) {
+        cube.style.transform = q.toCSSTransform();
+      }
     });
 
     var inc = Quaternion.fromAxisAngle([Math.random(), Math.random(), Math.random()], 1 / 100);
-
-    requestAnimationFrame(loop = function () {
+    var loop = function () {
       tr.rotate(inc);
       requestAnimationFrame(loop);
-    });
+    };
+    loop();
 
   </script>
 </body>

@@ -1,7 +1,7 @@
 /**
- * @license Trackball.js v1.0.0 26/06/2021
+ * @license Trackball.js v1.1.0 10/08/2023
  *
- * Copyright (c) 2021, Robert Eisele (robert@xarg.org)
+ * Copyright (c) 2023, Robert Eisele (robert@raw.org)
  * Licensed under the MIT license.
  **/
 (function (root) {
@@ -16,9 +16,6 @@
 
     var self = this;
 
-    // Last constructed vector on the hemi-sphere
-    var lastVector = null;
-
     // Slide timing and angle difference
     var oldTime = 0, curTime = 0;
     var angleChange = 0;
@@ -26,8 +23,6 @@
     // Axis-Angle form for sliding
     var axis = null;
     var angle = 0;
-
-    var events = self['events'] = [];
 
     if (!opts) {
       opts = {};
@@ -41,18 +36,18 @@
       opts['scene'] = document.querySelector(opts['scene']);
     }
 
+    if (!opts['onDraw']) {
+      opts['onDraw'] = function () { };
+    }
+
     self['opts'] = opts;
 
     self['p'] = self['q'] = opts['q'] || Quaternion['ONE'];
 
     var scene = opts['scene'];
 
-    self['loop'] = function () {
-
-      for (var i = 0; i < events.length; i++) {
-        if (events[i]['type'] === 'draw')
-          events[i]['cb'].call(self, self['q']);
-      }
+    self['_doDraw'] = function () {
+      opts['onDraw'].call(self, self['q']);
     };
 
     function mousedown(ev) {
@@ -60,30 +55,30 @@
 
       var box = scene.getBoundingClientRect();
 
-      oldTime = curTime = performance.now()
+      var lastVector = self._project(ev['clientX'], ev['clientY'], box);
 
-      lastVector = self._project(ev['clientX'], ev['clientY'], box);
+      oldTime = curTime = performance.now();
 
       self['drag'] = {
         "startVector": lastVector,
         "box": box
       };
-      requestAnimationFrame(self['loop']);
+      requestAnimationFrame(self['_doDraw']);
     }
 
     function mousemove(ev) {
       if (self['drag'] === null) return;
 
-      oldTime = curTime;
-      curTime = performance.now();
+      //oldTime = curTime;
+      //curTime = performance.now();
 
-      lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
+      var lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
 
       var q = Quaternion['fromBetweenVectors'](self['drag']['startVector'], lastVector);
 
-      self['q'] = self['p']['mul'](q);
+      self['q'] = q['mul'](self['p']);
 
-      requestAnimationFrame(self['loop']);
+      requestAnimationFrame(self['_doDraw']);
     }
 
     function mouseup(ev) {
@@ -92,28 +87,31 @@
       oldTime = curTime;
       curTime = performance.now();
 
-      lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
+      var lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
 
       var q = Quaternion['fromBetweenVectors'](self['drag']['startVector'], lastVector);
 
-      self['p'] = self['q'] = self['p']['mul'](q);
+      self['p'] = self['q'] = q['mul'](self['p']);
 
       self['drag'] = null;
 
-      // Calc speed
-      var dw = 2 * Math.acos(q['w']);
-      var dt = Math.max(curTime - oldTime, 1);
-      angleChange = Math.min(0.2, Math.abs(dw / dt));
+      if (self['opts']['smooth']) {
 
-      if (self['opts']['smooth'] && angleChange > 0) {
+        // Calc speed
+        var dw = 2 * Math.acos(q['w']);
+        var dt = Math.max((curTime - oldTime) / 50, 1);
+        angleChange = Math.min(0.2, Math.abs(dw / dt));
 
-        axis = [q['x'], q['y'], q['z']];
-        angle = 0;
+        if (angleChange > 0) {
 
-        self['slideID'] = requestAnimationFrame(smoothSlide);
-      } else {
-        requestAnimationFrame(self['loop']);
+          axis = [q['x'], q['y'], q['z']];
+          angle = 0;
+
+          self['slideID'] = requestAnimationFrame(smoothSlide);
+          return;
+        }
       }
+      requestAnimationFrame(self['_doDraw']);
     }
 
     function smoothSlide() {
@@ -121,9 +119,9 @@
       angle += angleChange;
       angleChange *= 0.93;
 
-      self['q'] = self['p']['mul'](Quaternion['fromAxisAngle'](axis, angle));
+      self['q'] = Quaternion['fromAxisAngle'](axis, angle)['mul'](self['p']);
 
-      self['loop']();
+      self['_doDraw']();
 
       if (angleChange < 1e-3) {
         stopSlide();
@@ -149,53 +147,38 @@
     document.addEventListener('touchmove', function (ev) { if (ev.changedTouches.length === 1) mousemove(ev.changedTouches[0]); }, { "passive": true });
     document.addEventListener('touchend', function (ev) { if (ev.changedTouches.length === 1) mouseup(ev.changedTouches[0]); }, { "passive": true });
 
-    requestAnimationFrame(self['loop']);
+    requestAnimationFrame(self['_doDraw']);
   }
 
   Trackball.prototype = {
-    "events": null,
     "p": null,
     "q": null,
     "opts": null,
     "slideID": null,
     "drag": null,
-    "on": function (type, cb) {
-      this['events'].push({ "type": type, "cb": cb });
-    },
-    "off": function (type, cb) {
-      var ev = this['events'];
-      for (var i = ev.length - 1; i >= 0; i--) {
-        if (ev[i]['type'] === type && ev[i]['cb'] === cb) {
-          ev.splice(i, 1);
-        }
-      }
-    },
     _project: function (x, y, box) {
 
       var r = 1;
 
-      var res = Math.min(box['width'], box['height']) - 1;
+      var res = Math.max(box['width'], box['height']) - 1;
 
       // map to -1 to 1
-      x = (2 * (x - box['x']) - box['width'] - 1) / res;
-      y = (2 * (y - box['y']) - box['height'] - 1) / res;
-
-      if (this['opts']['limitAxis'] === 'x') y = 0;
-      if (this['opts']['limitAxis'] === 'y') x = 0;
+      if (this['opts']['limitAxis'] === 'x') x = 0;
+      else x = (2 * (x - box['x']) - box['width'] - 1) / res;
+      if (this['opts']['limitAxis'] === 'y') y = 0;
+      else y = (2 * (y - box['y']) - box['height'] - 1) / res;
 
       var dist2 = x * x + y * y;
 
-      if (dist2 <= r * r / 2)
-        var z = Math.sqrt(r * r - dist2);
+      if (2 * dist2 <= r * r)
+        return [x, y, Math.sqrt(r * r - dist2)];
       else
-        var z = r * r / 2 / Math.sqrt(dist2);
-
-      return [-x, -y, z]
+        return [x, y, r * r / 2 / Math.sqrt(dist2)];
     },
     "rotate": function (by) {
       if (!this['drag'] && !this['slideID']) {
         this['q'] = this['p'] = this['p']['mul'](by);
-        requestAnimationFrame(this['loop']);
+        requestAnimationFrame(this['_doDraw']);
       }
     }
   };

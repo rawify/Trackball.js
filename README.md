@@ -12,7 +12,7 @@ Trackball.js is a small JavaScript library on top of [Quaternion.js](https://git
 
 The library does no styling or anything to the DOM, it handles the user action and calculates the transformation you should apply. But this way you have much more freedom on perspective, what elements should rotate and what additional transforms should be applied to the element.
 
-If you are interested in the math behind this library or want to see a demo, take a look at the [derivation of the trackball](https://www.xarg.org/2021/07/trackball-rotation-using-quaternions/).
+If you are interested in the math behind this library or want to see a demo, take a look at the [derivation of the trackball](https://raw.org/article/trackball-rotation-using-quaternions/).
 
 
 ## Usage
@@ -79,10 +79,9 @@ let tr = new Trackball({
    q: new Quaternion, // Initial rotation
    smooth: true, // Smoothly roll out after a drag impulse was applied
    limitAxis: null, // Pass "x" or "y" if rotation should be limited to one axis
-});
-
-tr.on("draw", function(q) {
-  obj.style.transform = "matrix3d(" + q.toMatrix4() + ")";
+   onDraw: function(q) {
+    obj.style.transform = q.toCSSTransform();
+   }
 });
 
 </script>
@@ -98,11 +97,19 @@ Installing Trackball.js is as easy as cloning this repo or use one of the follow
 npm i trackball
 ```
 
+Functions
+===
+
+void rotate(Quaternion by)
+---
+If no interaction is present, `rotate()` changes the current orientation by the given quaternion
+
+
 Coding Style
 ===
 As every library I publish, Trackball.js is also built to be as small as possible after compressing it with Google Closure Compiler in advanced mode. Thus the coding style orientates a little on maxing-out the compression rate. Please make sure you keep this style if you plan to extend the library.
 
 Copyright and licensing
 ===
-Copyright (c) 2021, [Robert Eisele](https://www.xarg.org/)
+Copyright (c) 2023, [Robert Eisele](https://raw.org/)
 Licensed under the MIT license.

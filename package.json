@@ -1,7 +1,7 @@
 {
     "name": "trackball",
     "title": "Trackball.js",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "homepage": "https://www.xarg.org/2021/07/trackball-rotation-using-quaternions/",
     "bugs": "https://github.com/infusion/Trackingball.js/issues",
     "description": "A library to add a virtual Trackball to your DOM",
