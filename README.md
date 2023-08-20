@@ -4,10 +4,10 @@
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-Trackball.js is a small JavaScript library on top of [Quaternion.js](https://github.com/infusion/Quaternion.js) to enable free 3D rotation of elements using CSS3 transforms that feels naturally by using the mouse or touch.
+Trackball.js is a small JavaScript library on top of [Quaternion.js](https://github.com/rawify/Quaternion.js) to enable free 3D rotation of elements using CSS3 transforms that feels naturally by using the mouse or touch.
 
 <p align="center">
-<img src="https://github.com/infusion/Trackball.js/blob/main/res/cube.png?raw=true" width="300">
+<img src="https://github.com/rawify/Trackball.js/blob/main/res/cube.png?raw=true" width="300">
 </p>
 
 The library does no styling or anything to the DOM, it handles the user action and calculates the transformation you should apply. But this way you have much more freedom on perspective, what elements should rotate and what additional transforms should be applied to the element.
