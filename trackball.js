@@ -189,8 +189,8 @@
     });
   } else if (typeof exports === 'object') {
     Object.defineProperty(exports, '__esModule', { 'value': true });
-    Quaternion['default'] = Trackball;
-    Quaternion['Trackball'] = Trackball;
+    Trackball['default'] = Trackball;
+    Trackball['Trackball'] = Trackball;
     module['exports'] = Trackball;
   } else {
     root['Trackball'] = Trackball;
