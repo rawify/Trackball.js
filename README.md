@@ -1,7 +1,6 @@
 # Trackball.js - 3D Trackballs for your Website
 
-[![NPM Package](https://nodei.co/npm-dl/trackball.png?months=6&height=1)](https://npmjs.org/package/trackball)
-
+[![NPM Package](https://img.shields.io/npm/v/trackball.svg?style=flat)](https://npmjs.org/package/trackball "View this project on npm")
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 Trackball.js is a small JavaScript library on top of [Quaternion.js](https://github.com/rawify/Quaternion.js) to enable free 3D rotation of elements using CSS3 transforms that feels naturally by using the mouse or touch.
@@ -89,27 +88,45 @@ let tr = new Trackball({
 
 The good thing about the callback approach is, that you have full control over the styling. You can use the passed quaternion and transform it further or even use it in another way than CSS transforms.
 
-Installation
-===
+## Installation
+
 Installing Trackball.js is as easy as cloning this repo or use one of the following commands:
 
 ```
 npm i trackball
 ```
 
-Functions
-===
+## Functions
+
 
 void rotate(Quaternion by)
 ---
 If no interaction is present, `rotate()` changes the current orientation by the given quaternion
 
 
-Coding Style
-===
+
+## Coding Style
+
 As every library I publish, Trackball.js is also built to be as small as possible after compressing it with Google Closure Compiler in advanced mode. Thus the coding style orientates a little on maxing-out the compression rate. Please make sure you keep this style if you plan to extend the library.
 
-Copyright and licensing
-===
-Copyright (c) 2023, [Robert Eisele](https://raw.org/)
+## Building the library
+
+After cloning the Git repository run:
+
+```
+npm install
+npm run build
+```
+
+## Run a test
+
+Testing the source against the shipped test suite is as easy as
+
+```
+npm run test
+```
+
+## Copyright and licensing
+
+Copyright (c) 2025, [Robert Eisele](https://raw.org/)
 Licensed under the MIT license.

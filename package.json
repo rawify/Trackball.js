@@ -1,7 +1,7 @@
 {
     "name": "trackball",
     "title": "Trackball.js",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "homepage": "https://raw.org/article/trackball-rotation-using-quaternions/",
     "bugs": "https://github.com/rawify/Trackball.js/issues",
     "description": "A library to add a virtual Trackball to your DOM",
@@ -16,27 +16,48 @@
         "3d",
         "quaternion"
     ],
-    "author": "Robert Eisele <robert@raw.org> (https://raw.org/)",
-    "main": "trackball.js",
-    "types": "trackball.d.ts",
     "private": false,
+    "main": "./dist/trackball.js",
+    "module": "./dist/trackball.mjs",
+    "types": "./trackball.d.ts",
+    "browser": "./dist/trackball.min.js",
+    "unpkg": "./dist/trackball.min.js",
     "readmeFilename": "README.md",
-    "directories": {
-        "example": "examples"
+    "exports": {
+        ".": {
+            "types": "./trackball.d.ts",
+            "require": "./dist/trackball.js",
+            "import": "./dist/trackball.mjs"
+        }
     },
-    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git@github.com:rawify/Trackball.js.git"
     },
     "funding": {
-        "type": "patreon",
-        "url": "https://www.patreon.com/infusion"
+        "type": "github",
+        "url": "https://github.com/sponsors/rawify"
     },
+    "author": {
+        "name": "Robert Eisele",
+        "email": "robert@raw.org",
+        "url": "https://raw.org/"
+    },
+    "license": "MIT",
     "engines": {
         "node": "*"
     },
+    "directories": {
+        "example": "examples"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "crude-build Trackball"
+    },
     "dependencies": {
         "quaternion": "*"
+    },
+    "devDependencies": {
+        "crude-build": "^0.0.1"
     }
 }
