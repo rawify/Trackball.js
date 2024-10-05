@@ -178,8 +178,7 @@ Trackball.prototype = {
   }
 };
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = Trackball;
-module.exports = Trackball; 
+Object.defineProperty(Trackball, "__esModule", { 'value': true });
+Trackball['default'] = Trackball;
+Trackball['Trackball'] = Trackball;
+module['exports'] = Trackball;
