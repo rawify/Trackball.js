@@ -178,5 +178,5 @@ Trackball.prototype = {
   }
 };
 export {
-  Trackball as default
+  Trackball as default, Trackball
 };
