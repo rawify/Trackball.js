@@ -1,7 +1,7 @@
 {
     "name": "trackball",
     "title": "Trackball.js",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "homepage": "https://raw.org/article/trackball-rotation-using-quaternions/",
     "bugs": "https://github.com/rawify/Trackball.js/issues",
     "description": "A library to add a virtual Trackball to your DOM",
@@ -55,9 +55,9 @@
         "build": "crude-build Trackball"
     },
     "dependencies": {
-        "quaternion": "1.6.2"
+        "quaternion": "1.6.5"
     },
     "devDependencies": {
-        "crude-build": "^0.0.4"
+        "crude-build": "^0.1.1"
     }
 }
