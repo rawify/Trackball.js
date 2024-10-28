@@ -69,7 +69,7 @@ function Trackball(opts) {
 
     var lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
 
-    var q = Quaternion['fromBetweenVectors'](self['drag']['startVector'], lastVector);
+    var q = Quaternion['fromVectors'](self['drag']['startVector'], lastVector);
 
     self['q'] = q['mul'](self['p']);
 
@@ -84,7 +84,7 @@ function Trackball(opts) {
 
     var lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
 
-    var q = Quaternion['fromBetweenVectors'](self['drag']['startVector'], lastVector);
+    var q = Quaternion['fromVectors'](self['drag']['startVector'], lastVector);
 
     self['p'] = self['q'] = q['mul'](self['p']);
 

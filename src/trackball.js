@@ -1,5 +1,5 @@
 /**
- * @license Trackball.js v1.2.3 10/9/2024
+ * @license Trackball.js v1.2.3 10/28/2024
  * https://raw.org/article/trackball-rotation-using-quaternions/
  *
  * Copyright (c) 2024, Robert Eisele (https://raw.org/)
@@ -74,7 +74,7 @@ function Trackball(opts) {
 
     var lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
 
-    var q = Quaternion['fromBetweenVectors'](self['drag']['startVector'], lastVector);
+    var q = Quaternion['fromVectors'](self['drag']['startVector'], lastVector);
 
     self['q'] = q['mul'](self['p']);
 
@@ -89,7 +89,7 @@ function Trackball(opts) {
 
     var lastVector = self._project(ev['clientX'], ev['clientY'], self['drag']['box']);
 
-    var q = Quaternion['fromBetweenVectors'](self['drag']['startVector'], lastVector);
+    var q = Quaternion['fromVectors'](self['drag']['startVector'], lastVector);
 
     self['p'] = self['q'] = q['mul'](self['p']);
 
