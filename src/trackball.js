@@ -1,5 +1,5 @@
 /**
- * @license Trackball.js v1.2.3 10/28/2024
+ * @license Trackball.js v1.2.4 10/28/2024
  * https://raw.org/article/trackball-rotation-using-quaternions/
  *
  * Copyright (c) 2024, Robert Eisele (https://raw.org/)
