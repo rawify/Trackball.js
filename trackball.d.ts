@@ -1,7 +1,9 @@
 declare module 'Trackball';
 
-export default class Trackball {
+export class Trackball {
   constructor (options: Object);
 
   rotate(by: Object): void;
 }
+
+export default Trackball;
