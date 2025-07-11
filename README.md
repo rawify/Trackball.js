@@ -14,9 +14,9 @@ The library does no styling or anything to the DOM, it handles the user action a
 If you are interested in the math behind this library or want to see a demo, take a look at the [derivation of the trackball](https://raw.org/article/trackball-rotation-using-quaternions/).
 
 
-## Usage
+## Example
 
-The usage is pretty straightforward. Create a scene that should handle the input and put a object with 3D transforms in it:
+The usage of Trackball.js is pretty straightforward. Create a scene that should handle the input and put a object with 3D transforms in it:
 
 
 ```html
@@ -90,10 +90,46 @@ The good thing about the callback approach is, that you have full control over t
 
 ## Installation
 
-Installing Trackball.js is as easy as cloning this repo or use one of the following commands:
+You can install `Trackball.js` via npm:
 
+```bash
+npm install trackball
 ```
-npm i trackball
+
+Or with yarn:
+
+```bash
+yarn add trackball
+```
+
+Alternatively, download or clone the repository:
+
+```bash
+git clone https://github.com/rawify/Trackball.js
+```
+
+## Usage
+
+Include the `trackball.min.js` file in your project:
+
+```html
+<script src="path/to/trackball.min.js"></script>
+<script>
+  const cm = new Trackball();
+  ...
+</script>
+```
+
+Or in a Node.js project:
+
+```javascript
+const Trackball = require('trackball');
+```
+
+or
+
+```javascript
+import Trackball from "trackball";
 ```
 
 ## Functions

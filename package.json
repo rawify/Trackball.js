@@ -4,7 +4,7 @@
     "version": "1.2.4",
     "homepage": "https://raw.org/article/trackball-rotation-using-quaternions/",
     "bugs": "https://github.com/rawify/Trackball.js/issues",
-    "description": "A library to add a virtual Trackball to your DOM",
+    "description": "The RAW library to add a virtual Trackball to your DOM",
     "keywords": [
         "arcball",
         "trackball",
