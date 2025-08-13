@@ -146,7 +146,7 @@
   </div>
 
   <script src="../node_modules/quaternion/dist/quaternion.min.js"></script>
-  <script src="../dist/trackball.js"></script>
+  <script src="../dist/trackball.min.js"></script>
   <script>
 
     var cube = document.getElementsByClassName("cube")[0];
@@ -154,9 +154,19 @@
     var tr = new Trackball({
       scene: ".scene", // Selector to apply trackball on
       q: new Quaternion(Math.random(), Math.random(), Math.random(), Math.random()).normalize(), // Initial rotation
-      smooth: false, // Smoothly roll out after a drag impulse was applied
+      inertia: { // Smoothly roll out after a drag impulse was applied
+        damping: 0.93,  // per-frame decay multiplier
+        maxStep: 0.2,   // cap for initial per-frame angle (radians)
+        minVelocity: 1e-3,// stop threshold (radians per frame)
+        timeDiv: 50     // scales drag duration (dt = Δt / timeDiv)
+      },
       limitAxis: null, // Pass "x" or "y" if rotation should be limited to a certain axis
+      areaPolicy: 'start-inside', // start inside the box, continue outside
+      border: 0.5, // rounded arcball border
+      ballsize: 0.75,
       onDraw: function (q) {
+        // apply q (Quaternion) to your view matrix / object here
+        // e.g., shader uniform from q.toMatrix4() if your lib supports it
         cube.style.transform = q.toCSSTransform();
       }
     });
