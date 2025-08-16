@@ -1,10 +1,10 @@
 {
     "name": "trackball",
     "title": "Trackball.js",
-    "version": "1.3.0",
+    "version": "1.3.1",
+    "description": "The RAW library to add a virtual Trackball to your DOM",
     "homepage": "https://raw.org/article/trackball-rotation-using-quaternions/",
     "bugs": "https://github.com/rawify/Trackball.js/issues",
-    "description": "The RAW library to add a virtual Trackball to your DOM",
     "keywords": [
         "arcball",
         "trackball",
@@ -19,17 +19,38 @@
     "private": false,
     "main": "./dist/trackball.js",
     "module": "./dist/trackball.mjs",
-    "types": "./trackball.d.ts",
     "browser": "./dist/trackball.min.js",
     "unpkg": "./dist/trackball.min.js",
-    "readmeFilename": "README.md",
+    "types": "./trackball.d.ts",
     "exports": {
         ".": {
-            "types": "./trackball.d.ts",
-            "require": "./dist/trackball.js",
-            "import": "./dist/trackball.mjs"
+            "import": {
+                "types": "./trackball.d.mts",
+                "default": "./dist/trackball.mjs"
+            },
+            "require": {
+                "types": "./trackball.d.ts",
+                "default": "./dist/trackball.js"
+            },
+            "browser": {
+                "types": "./trackball.d.ts",
+                "default": "./dist/trackball.min.js"
+            },
+            "default": {
+                "types": "./trackball.d.ts",
+                "default": "./dist/trackball.js"
+            }
+        },
+        "./package.json": "./package.json"
+    },
+    "typesVersions": {
+        "<4.7": {
+            "*": [
+                "trackball.d.ts"
+            ]
         }
     },
+    "sideEffects": false,
     "repository": {
         "type": "git",
         "url": "git@github.com:rawify/Trackball.js.git"
@@ -55,7 +76,7 @@
         "build": "crude-build Trackball"
     },
     "dependencies": {
-        "quaternion": "2.0.1"
+        "quaternion": "2.1.0"
     },
     "devDependencies": {
         "crude-build": "^0.1.2"

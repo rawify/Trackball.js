@@ -6,4 +6,4 @@ export class Trackball {
   rotate(by: Object): void;
 }
 
-export = Trackball;
+export default Trackball;
